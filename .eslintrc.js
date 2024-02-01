@@ -3,11 +3,14 @@ const path = require('path');
 module.exports = {
   root: true,
   extends: [
+    'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
-    'plugin:import/recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:jest/recommended',
   ],
-  plugins: ['react', 'react-hooks', 'prettier', 'import', 'jsx'],
+  plugins: ['react', 'react-hooks', 'prettier'],
   parser: '@babel/eslint-parser',
   settings: {
     'import/resolver': {
@@ -31,8 +34,10 @@ module.exports = {
     },
   },
   env: {
-    es2021: true,
+    es6: true,
     browser: true,
+    node: true,
+    jquery: true,
   },
   rules: {
     quotes: 0,
@@ -74,7 +79,7 @@ module.exports = {
         forbid: ['any'],
       },
     ],
-    'react/no-unused-vars': 0,
+    'no-unused-vars': 'warn',
     'react/jsx-boolean-value': 0,
     'react/jsx-closing-bracket-location': 0,
     'react/jsx-curly-spacing': 1,

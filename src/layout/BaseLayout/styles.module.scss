@@ -1,0 +1,30 @@
+@import 'styles/_variables.scss';
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  min-width: $content-min-width;
+  background-color: $background-color;
+
+  .container {
+    max-width: $content-max-width;
+
+    height: 100%;
+    margin: 0 auto;
+
+    .content {
+      height: 100%;
+      &.blurred {
+        filter: blur(4px);
+      }
+    }
+  }
+}
+
+@media (max-width: $content-max-width) {
+  .wrapper {
+    .container {
+      margin: 0 20px;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+@import 'styles/_variables.scss';
+
+.button {
+  max-width: 248px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 16px 0;
+  background-color: $disabled-button-color;
+  color: white;
+  border-radius: 4px;
+  &.active {
+    background-color: $active-button-color;
+  }
+}
