@@ -1,0 +1,58 @@
+@import 'styles/_variables.scss';
+
+$max-table-width: 596px;
+
+.wrapper {
+  position: relative;
+  max-width: $max-table-width;
+
+  .actions {
+    position: relative;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .overflow {
+    overflow-x: scroll;
+
+    .table {
+      width: $max-table-width;
+      margin: 15px 0 10px;
+      border: 1px solid $border-color;
+
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr 1fr 0.9fr 1.8fr;
+        grid-template-rows: auto;
+        font-size: 12px;
+        background-color: white;
+        color: $main-font-color;
+
+        &.tableHeader {
+          border-radius: 2px 2px 0 0;
+          background-color: $table-header-color;
+          color: $table-header-font-color;
+          .col {
+            border: 1px solid transparent;
+          }
+        }
+
+        .col {
+          padding: 10px 14px;
+          border: 1px solid $border-color;
+          border-right: none;
+          &:first-child {
+            border-left: none;
+          }
+          &:last-child {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+      }
+    }
+  }
+}

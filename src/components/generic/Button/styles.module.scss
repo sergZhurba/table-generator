@@ -1,0 +1,29 @@
+@import 'styles/_variables.scss';
+
+.button {
+  font-size: 12px;
+  line-height: 14px;
+  text-decoration: underline;
+
+  &.primary {
+    min-width: 90px;
+    padding: 4px 16px;
+    background-color: $active-button-color;
+    color: white;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    text-decoration: none;
+  }
+  &.edit {
+    color: $active-button-color;
+  }
+  &.delete {
+    color: $delete-button-color;
+  }
+  &.close {
+    min-width: unset;
+    width: 20px;
+    height: 20px;
+    background: url('~/src/icons/cross.svg') no-repeat;
+  }
+}

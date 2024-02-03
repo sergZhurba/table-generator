@@ -9,13 +9,12 @@
   }
 
   .textInput {
-    font-family: 'Roboto', sans-serif;
     width: 100%;
     font-size: 12px;
     font-weight: 400;
     padding: 14px;
     border-radius: 4px;
-    border: 1px solid #e6ecef;
+    border: 1px solid $border-color;
     box-sizing: border-box;
     &::placeholder {
       color: $main-font-color;

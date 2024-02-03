@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
-import { ModalContext } from 'layout/BaseLayout';
 import Input from 'components/generic/Input';
 import Dropdown from 'components/generic/Dropdown';
 import ModalButton from 'components/generic/ModalButton';
@@ -14,37 +14,57 @@ const options = [
   { key: 'Ventspils', label: 'Ventspils' },
 ];
 
-const InputContainer = () => {
-  const { showModal } = React.useContext(ModalContext);
+const InputContainer = ({ data, onSave }) => {
+  const [state, setState] = useState(data);
+  const [error, setError] = useState({});
 
-  const onChange = (inputName, value) => console.log(inputName, value);
+  const onChange = (inputName, value) =>
+    setState((s) => ({ ...s, [inputName]: value }));
+
+  const getInputProps = (name) => ({
+    name,
+    value: state[name],
+    error: error[name],
+    onChange,
+  });
+
+  const disabled = !Object.values(state).some((v) => !v);
 
   return (
     <div className={styles.wrapper}>
+      <Input placeholder={'Name'} mode={'name'} {...getInputProps('name')} />
       <Input
-        name={'name'}
-        placeholder={'Name'}
-        mode={'name'}
-        onChange={onChange}
-      />
-      <Input
-        name={'surname'}
         placeholder={'Surname'}
         mode={'name'}
-        onChange={onChange}
+        {...getInputProps('surname')}
       />
-      <Input
-        name={'age'}
-        placeholder={'Age'}
-        mode={'number'}
-        onChange={onChange}
+      <Input placeholder={'Age'} mode={'number'} {...getInputProps('age')} />
+      <Dropdown
+        placeholder={'City'}
+        options={options}
+        {...getInputProps('city')}
       />
-      <Dropdown placeholder={'City'} options={options} />
       <div className={styles.button}>
-        <ModalButton text={'ADD'} isActive={true} onClick={null} />
+        <ModalButton
+          text={'ADD'}
+          disabled={disabled}
+          onClick={() => onSave(state)}
+        />
       </div>
     </div>
   );
+};
+
+InputContainer.propTypes = {
+  data: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    tableId: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    surname: PropTypes.string.isRequired,
+    age: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
+  }),
+  onSave: PropTypes.func.isRequired,
 };
 
 export default InputContainer;

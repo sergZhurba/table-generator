@@ -9,14 +9,14 @@ const Popup = (props) => {
 
   return (
     <div className={styles.wrapper}>
-      {options.map((option) => (
+      {options.map(({ key, label }) => (
         <button
-          key={option.key}
+          key={key}
           type="button"
-          className={cn(styles.item, option.key === value && styles.selected)}
-          onClick={() => onChange(option.key)}
+          className={cn(styles.item, key === value && styles.selected)}
+          onClick={() => onChange(key)}
         >
-          {option.label}
+          {label}
         </button>
       ))}
     </div>

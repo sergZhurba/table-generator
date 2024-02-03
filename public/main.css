@@ -1,5 +1,21 @@
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(143, 143, 153) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 7px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(143, 143, 153);
+  border-radius: 20px;
+}
+
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
   overflow: hidden;
   -webkit-user-select: none;
   -webkit-touch-callout: none;

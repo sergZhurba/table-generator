@@ -6,6 +6,9 @@ $min-width: 248px;
 //Background color
 $background-color: #e5e8ed;
 
+//Border
+$border-color: rgba(235, 235, 235, 1);
+
 //Font Color
 $main-font-color: #868a8d;
 $active-font-color: #212229;
@@ -13,5 +16,9 @@ $active-font-color: #212229;
 // Buttons color
 $disabled-button-color: #c2cbd1;
 $active-button-color: #1493fe;
-
+$delete-button-color: #b0263d;
 $error-color: red;
+
+//Table
+$table-header-color: rgba(10, 80, 139, 1);
+$table-header-font-color: #749bbd;

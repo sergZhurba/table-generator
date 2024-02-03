@@ -4,7 +4,6 @@ import cn from 'classnames';
 import useOnclickOutside from 'react-cool-onclickoutside';
 
 import Popup from './Popup';
-
 import styles from './styles.module.scss';
 
 const Dropdown = (props) => {
@@ -22,10 +21,8 @@ const Dropdown = (props) => {
   const triggerPopup = () => setIsOpen(!isOpen);
   const hidePopup = () => setIsOpen(false);
 
-  const changeHandler = (value) => onChange(name, value ? value : undefined);
-
-  const popupChangeHandler = ({ key } = {}) => {
-    changeHandler(key);
+  const changeHandler = (key) => {
+    onChange(name, key);
     hidePopup();
   };
   const ref = useOnclickOutside(() => hidePopup());
@@ -46,7 +43,7 @@ const Dropdown = (props) => {
       </div>
       {Boolean(error) && <div className={styles.errorMsg}>{error}</div>}
       {isOpen && (
-        <Popup value={value} options={options} onChange={popupChangeHandler} />
+        <Popup value={value} options={options} onChange={changeHandler} />
       )}
     </div>
   );

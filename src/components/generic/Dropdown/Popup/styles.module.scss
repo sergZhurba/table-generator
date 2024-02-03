@@ -6,7 +6,7 @@
   max-height: 200px;
   padding: 0 13px;
   z-index: 11;
-  border: 1px solid #e6ecef;
+  border: 1px solid $border-color;
   border-radius: 4px;
   overflow-y: auto;
   background-color: white;
@@ -34,5 +34,6 @@
   }
   &.selected {
     color: $active-font-color;
+    font-weight: 700;
   }
 }

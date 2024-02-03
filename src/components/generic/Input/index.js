@@ -9,6 +9,8 @@ const validations = {
   number: /[0-9]+$/,
 };
 
+const MAX_AGE = 100;
+
 const Input = React.forwardRef(function WithRef(props, ref) {
   const {
     name,
@@ -21,21 +23,24 @@ const Input = React.forwardRef(function WithRef(props, ref) {
     ...rest
   } = props;
 
+  const [input, setInput] = useState(rawValue || '');
   const [focused, setFocused] = useState(false);
 
   const changeInput = (v) => onChange(name, v);
 
   const changeHandler = ({ target: { value } }) => {
-    changeInput(validations[mode].test(value) ? value : '');
+    if (value === '0') return setInput('');
+    if (mode === 'number' && Number(value) >= MAX_AGE) return;
+    setInput(validations[mode].test(value) ? value : '');
   };
   const focusHandler = () => setFocused(true);
   const blurHandler = ({ target: { value } }) => {
-    value.trim().length === 0 && changeInput('');
+    changeInput(value.trim().length === 0 ? '' : value);
     setFocused(false);
   };
 
   const globalInputProps = {
-    value: rawValue || '',
+    value: input,
     type: type || 'text',
     placeholder: !focused ? placeholder : '',
     className: `${cn(styles.textInput, Boolean(error) && styles.error)}`,
