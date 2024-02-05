@@ -1,10 +1,9 @@
 @import 'styles/_variables.scss';
 
-$max-table-width: 596px;
-
 .wrapper {
   position: relative;
-  max-width: $max-table-width;
+  max-width: $container-max-width;
+  margin: 10px 0 30px;
 
   .actions {
     position: relative;
@@ -16,12 +15,14 @@ $max-table-width: 596px;
   }
 
   .overflow {
+    width: 100%;
     overflow-x: scroll;
 
     .table {
-      width: $max-table-width;
+      width: $container-max-width;
       margin: 15px 0 10px;
       border: 1px solid $border-color;
+      box-sizing: border-box;
 
       .row {
         display: grid;

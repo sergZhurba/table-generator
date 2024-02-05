@@ -1,0 +1,23 @@
+@import 'styles/_variables.scss';
+
+.container {
+  width: 280px;
+  padding: 16px;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+  z-index: 11;
+
+  .description {
+    color: $main-font-color;
+    font-size: 16px;
+    margin: 20px 0 30px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0 0;
+    gap: 20px;
+  }
+}

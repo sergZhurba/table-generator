@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
+import { v4 as uuid } from 'uuid';
 
 import Input from 'components/generic/Input';
 import Dropdown from 'components/generic/Dropdown';
 import ModalButton from 'components/generic/ModalButton';
+import { initialInputData } from 'components/form/InputData';
 
 import styles from './styles.module.scss';
 
@@ -14,24 +17,36 @@ const options = [
   { key: 'Ventspils', label: 'Ventspils' },
 ];
 
-const InputContainer = ({ data, onSave }) => {
-  const [state, setState] = useState(data);
-  const [error, setError] = useState({});
+const buttonText = {
+  add: 'ADD',
+  edit: 'AGREE',
+};
 
-  const onChange = (inputName, value) =>
-    setState((s) => ({ ...s, [inputName]: value }));
+const InputContainer = ({ type = 'add', data, rowAmount, onAdd, onChange }) => {
+  if (rowAmount) {
+    const doc = document.documentElement;
+    doc.style.setProperty('--grid-rows', rowAmount);
+  }
+
+  const onDataChange = (inputName, value) => {
+    const newState = { ...data, [inputName]: value };
+    onChange(newState);
+  };
 
   const getInputProps = (name) => ({
     name,
-    value: state[name],
-    error: error[name],
-    onChange,
+    value: data[name],
+    onChange: onDataChange,
   });
 
-  const disabled = !Object.values(state).some((v) => !v);
+  const handleAddData = () => {
+    onAdd({ id: uuid(), ...data });
+    onChange(initialInputData);
+  };
+  const disabled = Object.values(data).some((v) => !v);
 
   return (
-    <div className={styles.wrapper}>
+    <div className={cn(styles.wrapper, rowAmount && styles.changeLayout)}>
       <Input placeholder={'Name'} mode={'name'} {...getInputProps('name')} />
       <Input
         placeholder={'Surname'}
@@ -46,9 +61,10 @@ const InputContainer = ({ data, onSave }) => {
       />
       <div className={styles.button}>
         <ModalButton
-          text={'ADD'}
+          type={'primary'}
+          text={buttonText[type]}
           disabled={disabled}
-          onClick={() => onSave(state)}
+          onClick={handleAddData}
         />
       </div>
     </div>
@@ -57,14 +73,15 @@ const InputContainer = ({ data, onSave }) => {
 
 InputContainer.propTypes = {
   data: PropTypes.shape({
-    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-    tableId: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,
     age: PropTypes.string.isRequired,
     city: PropTypes.string.isRequired,
   }),
-  onSave: PropTypes.func.isRequired,
+  type: PropTypes.oneOf(['add', 'edit']).isRequired,
+  rowAmount: PropTypes.number,
+  onAdd: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
 };
 
 export default InputContainer;

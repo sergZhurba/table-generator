@@ -1,12 +1,33 @@
+@import 'styles/_variables.scss';
+
+:root {
+  --grid-rows: 1;
+}
+
 .wrapper {
-  width: 280px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  min-width: 280px;
   padding: 16px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
   box-sizing: border-box;
   border-radius: 4px;
   background-color: white;
 
+  &.changeLayout {
+    grid-template-columns: repeat(var(--grid-rows), 1fr);
+    margin-top: 20px;
+    column-gap: 20px;
+    @media (max-width: $container-max-width) {
+      grid-template-columns: 1fr;
+      gap: unset;
+    }
+  }
+
   .button {
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
   }
 }

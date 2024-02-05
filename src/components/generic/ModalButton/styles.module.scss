@@ -9,10 +9,14 @@
   font-size: 12px;
   font-weight: 700;
   padding: 16px 0;
-  background-color: $disabled-button-color;
+
   color: white;
   border-radius: 4px;
-  &.active {
+  &.primary {
     background-color: $active-button-color;
+  }
+  &.disabled,
+  &.secondary {
+    background-color: $disabled-button-color;
   }
 }

@@ -1,0 +1,17 @@
+@import 'styles/_variables.scss';
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+
+  &.changeLayout {
+    flex-direction: column;
+  }
+
+  @media (max-width: $container-max-width) {
+    display: block;
+  }
+}

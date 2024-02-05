@@ -8,7 +8,6 @@ import styles from './styles.module.scss';
 
 const TableRow = ({
   id,
-  tableId,
   className,
   name,
   surname,
@@ -17,6 +16,13 @@ const TableRow = ({
   onEdit,
   onDelete,
 }) => {
+  const handleEditRow = () => {
+    onEdit(id);
+  };
+
+  const handleDeleteRow = () => {
+    onDelete(id);
+  };
   return (
     <div className={cn(styles.row, className)}>
       <div className={styles.col}>{name}</div>
@@ -35,6 +41,15 @@ const TableRow = ({
   );
 };
 
-TableRow.propTypes = {};
+TableRow.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  className: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  surname: PropTypes.string.isRequired,
+  age: PropTypes.string.isRequired,
+  city: PropTypes.string.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+};
 
 export default TableRow;

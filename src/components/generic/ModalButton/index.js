@@ -4,12 +4,21 @@ import cn from 'classnames';
 
 import styles from './styles.module.scss';
 
-const ModalButton = ({ disabled, text, onClick }) => {
+const buttonType = {
+  primary: styles.primary,
+  secondary: styles.secondary,
+};
+
+const ModalButton = ({ disabled, type, text, onClick }) => {
   return (
     <button
-      className={cn(styles.button, disabled && styles.active)}
+      className={cn(
+        styles.button,
+        buttonType[type],
+        disabled && styles.disabled
+      )}
       type="button"
-      onClick={disabled ? onClick : null}
+      onClick={!disabled ? onClick : null}
     >
       {text}
     </button>
@@ -18,6 +27,7 @@ const ModalButton = ({ disabled, text, onClick }) => {
 
 ModalButton.propTypes = {
   disabled: PropTypes.bool,
+  type: PropTypes.oneOf(['primary', 'secondary']).isRequired,
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };

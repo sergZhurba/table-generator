@@ -12,35 +12,22 @@ const validations = {
 const MAX_AGE = 100;
 
 const Input = React.forwardRef(function WithRef(props, ref) {
-  const {
-    name,
-    value: rawValue,
-    error,
-    placeholder,
-    type,
-    mode,
-    onChange,
-    ...rest
-  } = props;
+  const { name, value, error, placeholder, type, mode, onChange, ...rest } =
+    props;
 
-  const [input, setInput] = useState(rawValue || '');
   const [focused, setFocused] = useState(false);
 
   const changeInput = (v) => onChange(name, v);
 
   const changeHandler = ({ target: { value } }) => {
-    if (value === '0') return setInput('');
+    if (value === '0') return changeInput('');
     if (mode === 'number' && Number(value) >= MAX_AGE) return;
-    setInput(validations[mode].test(value) ? value : '');
+    changeInput(validations[mode].test(value) ? value : '');
   };
   const focusHandler = () => setFocused(true);
-  const blurHandler = ({ target: { value } }) => {
-    changeInput(value.trim().length === 0 ? '' : value);
-    setFocused(false);
-  };
 
   const globalInputProps = {
-    value: input,
+    value,
     type: type || 'text',
     placeholder: !focused ? placeholder : '',
     className: `${cn(styles.textInput, Boolean(error) && styles.error)}`,
@@ -52,7 +39,7 @@ const Input = React.forwardRef(function WithRef(props, ref) {
         ref={ref}
         onFocus={focusHandler}
         onChange={changeHandler}
-        onBlur={blurHandler}
+        onBlur={() => setFocused(false)}
         {...globalInputProps}
         {...rest}
       />

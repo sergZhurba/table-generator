@@ -1,7 +1,7 @@
 import React from 'react';
 
-import BaseLayout from 'layout/BaseLayout';
-import PageLayout from 'layout/PageLayout';
+import BaseLayout from 'components/layout/BaseLayout';
+import PageLayout from 'components/layout/PageLayout';
 
 function App() {
   return (

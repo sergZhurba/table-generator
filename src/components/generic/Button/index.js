@@ -6,6 +6,7 @@ import styles from './styles.module.scss';
 
 const buttonStyle = {
   primary: styles.primary,
+  secondary: styles.secondary,
   edit: styles.edit,
   delete: styles.delete,
   close: styles.close,
@@ -25,7 +26,8 @@ const Button = ({ text, type, onClick }) => {
 
 Button.propTypes = {
   text: PropTypes.string,
-  type: PropTypes.oneOf(['primary', 'edit', 'delete', 'close']).isRequired,
+  type: PropTypes.oneOf(['primary', 'secondary', 'edit', 'delete', 'close'])
+    .isRequired,
   onClick: PropTypes.func.isRequired,
 };
 
