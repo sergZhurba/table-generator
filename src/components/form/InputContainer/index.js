@@ -20,9 +20,17 @@ const options = [
 const buttonText = {
   add: 'ADD',
   edit: 'AGREE',
+  cancel: 'CANCEL',
 };
 
-const InputContainer = ({ type = 'add', data, rowAmount, onAdd, onChange }) => {
+const InputContainer = ({
+  type = 'add',
+  data,
+  rowAmount,
+  onAdd,
+  onClose,
+  onChange,
+}) => {
   if (rowAmount) {
     const doc = document.documentElement;
     doc.style.setProperty('--grid-rows', rowAmount);
@@ -60,6 +68,13 @@ const InputContainer = ({ type = 'add', data, rowAmount, onAdd, onChange }) => {
         {...getInputProps('city')}
       />
       <div className={styles.button}>
+        {onClose && (
+          <ModalButton
+            type={'secondary'}
+            text={buttonText['cancel']}
+            onClick={onClose}
+          />
+        )}
         <ModalButton
           type={'primary'}
           text={buttonText[type]}
@@ -81,6 +96,7 @@ InputContainer.propTypes = {
   type: PropTypes.oneOf(['add', 'edit']).isRequired,
   rowAmount: PropTypes.number,
   onAdd: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
   onChange: PropTypes.func,
 };
 

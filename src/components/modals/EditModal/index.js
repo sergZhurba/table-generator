@@ -17,6 +17,7 @@ const EditModal = ({ tableId, data, onCancel: onClose, onConfirm }) => {
     <InputContainer
       type={'edit'}
       data={state}
+      onClose={onClose}
       onAdd={handleConfirm}
       onChange={handleDataChange}
     />
